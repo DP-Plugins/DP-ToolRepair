@@ -1,0 +1,13 @@
+inventory_title: "Tool Repair"
+item_pane_display_name: " "
+item_repair_display_name: "§aClick to Repair Tools"
+item_repair_lore_space: " "
+item_repair_lore_money_cost: "§eMoney Cost: §f{0}"
+item_repair_lore_exp_cost: "§eExp Cost: §f{0}"
+command_open_description: "/dptr open - Open tool repair GUI"
+command_reload_description: "/dptr reload - Reload config file"
+message_reload_success: "§aSettings have been reloaded."
+message_not_enough_money: "§cYou don't have enough money to repair tools. Required: §f{0} §cCurrent: §f{1}"
+message_not_enough_exp: "§cYou don't have enough experience to repair tools. Required: §f{0} §cCurrent: §f{1}"
+message_repair_success: "§aTools have been repaired."
+

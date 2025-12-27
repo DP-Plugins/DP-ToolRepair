@@ -1,0 +1,13 @@
+inventory_title: "도구 수리"
+item_pane_display_name: " "
+item_repair_display_name: "§a도구 수리 클릭"
+item_repair_lore_space: " "
+item_repair_lore_money_cost: "§e돈 비용: §f{0}"
+item_repair_lore_exp_cost: "§e경험치 비용: §f{0}"
+command_open_description: "/dptr open - 도구 수리 GUI 열기"
+command_reload_description: "/dptr reload - 설정 파일 다시 불러오기"
+message_reload_success: "§a설정이 다시 불러와졌습니다."
+message_not_enough_money: "§c도구를 수리할 충분한 돈이 없습니다. 필요: §f{0} §c현재: §f{1}"
+message_not_enough_exp: "§c도구를 수리할 충분한 경험이 없습니다. 필요: §f{0} §c현재: §f{1}"
+message_repair_success: "§a도구가 수리되었습니다."
+
