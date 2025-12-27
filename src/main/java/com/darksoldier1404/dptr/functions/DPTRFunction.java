@@ -24,10 +24,10 @@ public class DPTRFunction {
     }
 
     public static void openToolRepairGUI(Player p) {
-        DInventory inv = new DInventory("Tool Repair", 54, plugin);
+        DInventory inv = new DInventory(plugin.getLang().get("inventory_title"), 54, plugin);
         ItemStack pane = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
         ItemMeta im = pane.getItemMeta();
-        im.setDisplayName(" ");
+        im.setDisplayName(plugin.getLang().get("item_pane_display_name"));
         im.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         pane.setItemMeta(im);
         NBT.setStringTag(pane, "dppc_clickcancel", "true");
@@ -38,7 +38,7 @@ public class DPTRFunction {
         }
         ItemStack doRepair = new ItemStack(Material.ANVIL);
         im = doRepair.getItemMeta();
-        im.setDisplayName("§aClick to Repair Tools");
+        im.setDisplayName(plugin.getLang().get("item_repair_display_name"));
         im.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         doRepair.setItemMeta(im);
         NBT.setStringTag(doRepair, "dptr_repair", "true");
@@ -86,12 +86,12 @@ public class DPTRFunction {
         }
         ItemMeta im = item.getItemMeta();
         List<String> lore = new ArrayList<>();
-        lore.add(" ");
+        lore.add(plugin.getLang().get("item_repair_lore_space"));
         if (plugin.isEnableMoneyCost()) {
-            lore.add("§eMoney Cost: §f" + totalMoneyCost);
+            lore.add(plugin.getLang().getWithArgs("item_repair_lore_money_cost", String.valueOf(totalMoneyCost)));
         }
         if (plugin.isEnableExpCost()) {
-            lore.add("§eExperience Cost: §f" + totalExpCost);
+            lore.add(plugin.getLang().getWithArgs("item_repair_lore_exp_cost", String.valueOf(totalExpCost)));
         }
         im.setLore(lore);
         item.setItemMeta(im);
@@ -99,12 +99,18 @@ public class DPTRFunction {
     }
 
     public static void repairTools(Player p, DInventory inv) {
-        if (!hasEnoughMoney(p, inv)) {
-            p.sendMessage(plugin.getPrefix() + "§cYou do not have enough money to repair the tools.");
+        int totalDurabilityToRepair = getTotalDurabilityToRepair(inv);
+        int totalMoneyCost = plugin.isEnableMoneyCost() ? totalDurabilityToRepair * plugin.getMoneyCostPerDurability() : 0;
+        int totalExpCost = plugin.isEnableExpCost() ? totalDurabilityToRepair * plugin.getExpCostPerDurability() : 0;
+
+        if (plugin.isEnableMoneyCost() && !MoneyAPI.hasEnoughMoney(p, totalMoneyCost)) {
+            double currentMoney = MoneyAPI.getMoney(p).doubleValue();
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("message_not_enough_money", String.valueOf(totalMoneyCost), String.valueOf(currentMoney)));
             return;
         }
-        if (!hasEnoughExp(p, inv)) {
-            p.sendMessage(plugin.getPrefix() + "§cYou do not have enough experience to repair the tools.");
+        if (plugin.isEnableExpCost() && p.getTotalExperience() < totalExpCost) {
+            int currentExp = p.getTotalExperience();
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("message_not_enough_exp", String.valueOf(totalExpCost), String.valueOf(currentExp)));
             return;
         }
         repairAndTakeRequirements(p, inv);
@@ -140,6 +146,6 @@ public class DPTRFunction {
             damageable.setDamage(0);
             repairItem.setItemMeta(im);
         }
-        p.sendMessage(plugin.getPrefix() + "§aYour tools have been repaired.");
+        p.sendMessage(plugin.getPrefix() + plugin.getLang().get("message_repair_success"));
     }
 }

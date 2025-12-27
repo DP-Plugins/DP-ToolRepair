@@ -10,18 +10,18 @@ public class DPTRCommand {
     private static final CommandBuilder builder = new CommandBuilder(plugin);
 
     public static void init() {
-        builder.beginSubCommand("open", "/dptr open - open the tool repair GUI")
+        builder.beginSubCommand("open", plugin.getLang().get("command_open_description"))
                 .withPermission("dptr.use")
                 .executesPlayer((p, args) -> {
                     DPTRFunction.openToolRepairGUI(p);
                     return true;
                 });
-        builder.beginSubCommand("reload", "/dptr reload - reload the config")
+        builder.beginSubCommand("reload", plugin.getLang().get("command_reload_description"))
                 .withPermission("dptr.admin")
                 .executes((sender, args) -> {
                     plugin.reload();
                     DPTRFunction.init();
-                    sender.sendMessage(plugin.getPrefix() + "§aConfiguration reloaded.");
+                    sender.sendMessage(plugin.getPrefix() + plugin.getLang().get("message_reload_success"));
                     return true;
                 });
         builder.build("dptr");

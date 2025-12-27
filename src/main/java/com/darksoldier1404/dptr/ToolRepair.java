@@ -14,7 +14,7 @@ public class ToolRepair extends DPlugin {
     private static boolean enableExpCost;
 
     public ToolRepair() {
-        super(false);
+        super(true);
         plugin = this;
         init();
     }
