@@ -1,0 +1,8 @@
+Settings:
+  prefix: "&f[ &eDP-ToolRepair &f] "
+  Lang: en_US
+
+  EnableMoneyCost: true
+  EnableExpCost: true
+  RepairMoneyCostPerDurability: 1
+  RepairExpCostPerDurability: 1
