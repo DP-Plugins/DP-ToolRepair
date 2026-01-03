@@ -99,6 +99,7 @@ public class DPTRFunction {
     }
 
     public static void repairTools(Player p, DInventory inv) {
+        p.updateInventory();
         int totalDurabilityToRepair = getTotalDurabilityToRepair(inv);
         int totalMoneyCost = plugin.isEnableMoneyCost() ? totalDurabilityToRepair * plugin.getMoneyCostPerDurability() : 0;
         int totalExpCost = plugin.isEnableExpCost() ? totalDurabilityToRepair * plugin.getExpCostPerDurability() : 0;
