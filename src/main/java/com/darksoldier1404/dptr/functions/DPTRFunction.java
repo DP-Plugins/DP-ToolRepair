@@ -115,7 +115,6 @@ public class DPTRFunction {
         }
         repairAndTakeRequirements(p, inv);
         refreshCost(inv);
-        p.updateInventory();
     }
 
     public static boolean hasEnoughMoney(Player p, DInventory inv) {
